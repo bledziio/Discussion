@@ -96,7 +96,7 @@ end
 
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/miroeramaa/TurtleLib/main/TurtleUiLib.lua"))()
 local window = library:Window("Window")
-local window2 = library:Window("Window2")
+
 window:Label("AutoFarm", Color3.fromRGB(127, 143, 166))
 window:Toggle("Train", false, function(bool)
     _G.auto1 = bool
