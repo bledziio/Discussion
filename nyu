@@ -1,0 +1,138 @@
+
+_G.auto4 = false
+_G.auto2 = false
+_G.auto1 = false
+_G.auto3 = false
+_G.auto5 = false
+local task_defer = task.defer
+_G.enemytemp = "001"
+_G.eggmaptemp = "001"
+_G.eggshoptemp = {}
+_G.eggshoptempval = "001"
+local eggTable = {
+    ["001"] = { "001", "002", "003", "004" },
+    ["002"] = { "005", "006", "007", "008" },
+    ["003"] = { "009", "010", "011", "012" },
+    ["004"] = { "013", "014", "015", "016" },
+    ["005"] = { "017", "018", "019", "020" },
+    ["006"] = { "021", "022", "023", "024" },
+    -- Add more mappings as needed
+}
+local eggkeysOnly = {} -- Initialize an empty table for keys
+for key, _ in pairs(eggTable) do table.insert(eggkeysOnly, key)  end
+
+local enemyTable = {
+    ["001"] = { "001", "002", "003", "004", "005", "006", "007"},
+    ["002"] = { "008", "009", "010", "011", "012", "013", "014"},
+    ["003"] = { "015", "016", "017", "018", "019", "020", "021"},
+    ["004"] = { "022", "023", "024", "025", "026", "027", "028"}
+    -- Add more mappings as needed
+}
+local enemykeysOnly = {} -- Initialize an empty table for keys
+for key, _ in pairs(enemyTable) do table.insert(enemykeysOnly, key)  end
+
+local mapTable = {"Castle", "Mushroom", "Desert","SnowLand","Underwater","Alien"}
+local maptableindex = {"001", "002", "003", "004", "005", "006"}
+
+function autoTrain()
+    while _G.auto1 do
+        for i=1,5 do
+            local trainer = "TrainPower"
+            trainer = trainer .. string.format("%03d", i * 7)
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Game"):WaitForChild("Re_TrainPower"):FireServer()
+            task.wait() 
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Game"):WaitForChild("Re_TrainPower"):FireServer(trainer)
+            task.wait()
+        end    
+    end
+end
+
+function autoFight(tablesvar)
+    while _G.auto2 do
+        local repeatCount = 30
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(1)
+        task.wait(0.5)
+        repeat
+            for i, v in pairs(enemyTable[tablesvar]) do
+                local npc = "Npc"
+                npc = npc .. string.format("%03d", v)
+                game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_TakeDamage"):FireServer(unpack({npc,1}))
+                game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_TakeDamage"):FireServer(unpack({npc,2}))
+                game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_TakeDamage"):FireServer(unpack({npc,3}))
+                task.wait()
+            end
+            repeatCount = repeatCount - 1
+        until not _G.auto2 or repeatCount <= 0
+    end
+end
+
+function hatcheggs(var)
+    local eggshop = "Draw"
+    eggshop = eggshop .. var
+    while _G.auto3 do
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Pets"):WaitForChild("Re_Hatch"):FireServer(unpack({"Hatch",eggshop,{}}))
+        task.wait()
+    end
+end
+
+function pickmaptable(tablevar)
+    for i, v in pairs(mapTable) do
+        if v == tablevar then
+            return maptableindex[i]
+        end
+    end
+    for i, v in pairs(eggkeysOnly) do
+        if v == tablevar then
+            return eggTable[v]
+        end
+    end
+end
+
+function teleportto(var)
+    local world = "World"
+    world = world .. var
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("World"):WaitForChild("Rf_TeleportToWorld"):InvokeServer(world)
+end   
+
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/miroeramaa/TurtleLib/main/TurtleUiLib.lua"))()
+local window = library:Window("Window")
+local window2 = library:Window("Window2")
+window:Toggle("Train", false, function(bool)
+    _G.auto1 = bool
+    task_defer(autoTrain())
+end)
+window:Dropdown("Choose World",mapTable , function(name)
+    _G.enemytemp = pickmaptable(name)
+ end)
+window:Toggle("Fight", false, function(bool)
+    _G.auto2 = bool
+    task_defer(autoFight(_G.enemytemp))
+end)
+window:Dropdown("Teleport", mapTable, function(name)
+    task_defer(teleportto(pickmaptable(name)))
+ end)
+ window2:Dropdown("Pick Egg World", mapTable, function(name)
+    _G.eggmaptemp = pickmaptable(name)
+    _G.eggshoptemp = pickmaptable(_G.eggmaptemp)
+
+ end) 
+window2:Dropdown("Choose Egg Shop", {1,2,3,4}, function(name)
+    _G.eggshoptempval =  _G.eggshoptemp[name]
+ end)
+window2:Toggle("Hatch Eggs", false, function(bool)
+    _G.auto3 = bool
+    task_defer(hatcheggs(_G.eggshoptempval))
+end)
+
+library:Keybind("P")
+
+
+
+
+
+
+
+
+
+
+
