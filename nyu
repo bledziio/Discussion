@@ -57,7 +57,7 @@ function autoTower()
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer(true)
         --game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer()
         task.wait()
-        local rcount = 600
+        local rcount = 300
         repeat
             for i=1,3 do
             game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_TakeDamage"):FireServer(i)
@@ -71,7 +71,7 @@ end
 
 function autoFight(tablesvar)
     while _G.auto2 do
-        local repeatCount = 150
+        local repeatCount = 400
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(1)
         task.wait(0.5)
         repeat
