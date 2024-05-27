@@ -40,15 +40,29 @@ function autoTrain()
             local trainer = "TrainPower"
             trainer = trainer .. string.format("%03d", i * 7)
             game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Game"):WaitForChild("Re_TrainPower"):FireServer(trainer)
-            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_TakeDamage"):FireServer(trainer)
         end    
         task.wait()
     end
 end
 
+function autoTower()
+    while _G.auto4 do
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer()
+        local repeatCount = 10
+        repeat
+            for i=1,3 do
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_TakeDamage"):FireServer(i)
+            end
+            task.wait()
+            repeatCount = repeatCount - 1
+        until not _G.auto4 or repeatCount <= 0
+    end
+end
+
+
 function autoFight(tablesvar)
     while _G.auto2 do
-        local repeatCount = 30
+        local repeatCount = 45
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(1)
         task.wait(0.5)
         repeat
@@ -107,6 +121,10 @@ end)
 window:Toggle("Fight", false, function(bool)
     _G.auto2 = bool
     task_defer(autoFight(_G.enemytemp))
+end)
+window:Toggle("Auto Tower", false, function(bool)
+    _G.auto4 = bool
+    task_defer(autoTower())
 end)
 
 window:Label("Teleport", Color3.fromRGB(50, 200, 166))
