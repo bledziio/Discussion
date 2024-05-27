@@ -39,10 +39,10 @@ function autoTrain()
         for i=1,5 do
             local trainer = "TrainPower"
             trainer = trainer .. string.format("%03d", i * 7)
-            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Game"):WaitForChild("Re_TrainPower"):FireServer()
-            task.wait() 
             game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Game"):WaitForChild("Re_TrainPower"):FireServer(trainer)
             task.wait()
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Game"):WaitForChild("Re_TrainPower"):FireServer()
+            task.wait() 
         end    
     end
 end
@@ -97,33 +97,37 @@ end
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/miroeramaa/TurtleLib/main/TurtleUiLib.lua"))()
 local window = library:Window("Window")
 local window2 = library:Window("Window2")
+window:Label("AutoFarm", Color3.fromRGB(127, 143, 166))
 window:Toggle("Train", false, function(bool)
     _G.auto1 = bool
     task_defer(autoTrain())
 end)
 window:Dropdown("Choose World",mapTable , function(name)
     _G.enemytemp = pickmaptable(name)
- end)
+end)
 window:Toggle("Fight", false, function(bool)
     _G.auto2 = bool
     task_defer(autoFight(_G.enemytemp))
 end)
-window:Dropdown("Teleport", mapTable, function(name)
-    task_defer(teleportto(pickmaptable(name)))
- end)
- window2:Dropdown("Pick Egg World", mapTable, function(name)
+
+window:Label("Auto Hatch", Color3.fromRGB(127, 143, 166))
+window:Dropdown("Pick Egg World", mapTable, function(name)
     _G.eggmaptemp = pickmaptable(name)
     _G.eggshoptemp = pickmaptable(_G.eggmaptemp)
 
- end) 
-window2:Dropdown("Choose Egg Shop", {1,2,3,4}, function(name)
+end) 
+window:Dropdown("Choose Egg Shop", {1,2,3,4}, function(name)
     _G.eggshoptempval =  _G.eggshoptemp[name]
- end)
-window2:Toggle("Hatch Eggs", false, function(bool)
+end)
+window:Toggle("Hatch Eggs", false, function(bool)
     _G.auto3 = bool
     task_defer(hatcheggs(_G.eggshoptempval))
 end)
 
+window:Label("Teleport", Color3.fromRGB(127, 143, 166))
+window:Dropdown("Teleport", mapTable, function(name)
+    task_defer(teleportto(pickmaptable(name)))
+end)
 library:Keybind("P")
 
 
