@@ -49,14 +49,14 @@ function autoTower()
     while _G.auto4 do
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer()
         
-        local repeatCount = 50
+        local rcount = 500
         repeat
             for i=1,3 do
             game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_TakeDamage"):FireServer(i)
             end
             task.wait()
-            repeatCount = repeatCount - 1
-        until not _G.auto4 or repeatCount <= 0
+            rcount = rcount - 1
+        until not _G.auto4 or rcount <= 0
         task.wait(0.5)
     end
 end
