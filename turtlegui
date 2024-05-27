@@ -75,7 +75,7 @@ TurtleUiLib.Name = "TurtleUiLib"
 
 protect_gui(TurtleUiLib)
 
-local xOffset = 60
+local xOffset = 100
 
 local uis = game:GetService("UserInputService")
 
