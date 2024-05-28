@@ -6,6 +6,7 @@ _G.auto3 = false
 _G.auto5 = false
 _G.auto6 = false
 local task_defer = task.defer
+
 _G.enemytemp = "001"
 _G.eggmaptemp = "001"
 _G.eggshoptemp = {}
