@@ -102,8 +102,6 @@ function autoFight(tablesvar)
     end
 end
 
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(5)
-
 
 function hatcheggs(var)
     local eggshop = "Draw"
