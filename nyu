@@ -91,7 +91,7 @@ function autoFight(tablesvar)
         --task.wait()
         repeat
             for i, v in pairs(enemyTable[tablesvar]) do
-                game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(1)
+                game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(i)
                 task.wait()
                 local npc = "Npc"
                 npc = npc .. string.format("%03d", v)
