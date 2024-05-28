@@ -86,32 +86,6 @@ end
 
 function autoFight(tablesvar)
     while _G.auto2 do
-        local repeatCount = 200
-        --game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(1)
-        --task.wait()
-        repeat
-            for i, v in pairs(enemyTable[tablesvar]) do
-                game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(i)
-                task.wait()
-                local npc = "Npc"
-                npc = npc .. string.format("%03d", v)
-                game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_TakeDamage"):FireServer(unpack({npc,1}))
-                game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_TakeDamage"):FireServer(unpack({npc,2}))
-                game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_TakeDamage"):FireServer(unpack({npc,3}))
-            end
-            task.wait()
-            repeatCount = repeatCount - 1
-        until not _G.auto2 or repeatCount <= 0
-    end
-    if not _G.auto2 then
-        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Rf_ChallengeFinish"):InvokeServer()
-    end
-end
-
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(5)
-
-function autoFight2(tablesvar)
-    while _G.auto5 do
         for i, v in pairs(enemyTable[tablesvar]) do
             game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(i)
             task.wait()
@@ -123,10 +97,13 @@ function autoFight2(tablesvar)
         end
         task.wait()
     end
-    if not _G.auto5 then
+    if not _G.auto2 then
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Rf_ChallengeFinish"):InvokeServer()
     end
 end
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(5)
+
 
 function hatcheggs(var)
     local eggshop = "Draw"
@@ -171,9 +148,7 @@ window:Toggle("Quick Fight", false, function(bool)
     _G.auto2 = bool
     task_defer(autoFight(_G.enemytemp))
 end)
-window:Toggle("Long Fight", false, function(bool)
-    _G.auto5 = bool
-    task_defer(autoFight2(_G.enemytemp))
+
 end)
 window:Toggle("Quick Tower", false, function(bool)
     _G.auto4 = bool
