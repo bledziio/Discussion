@@ -110,7 +110,7 @@ function hatcheggs(var)
     while _G.auto3 do
         local rcount = 300
         repeat 
-        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Pets"):WaitForChild("Re_Hatch"):FireServer(unpack({"Hatch",eggshop,{"Pet086","Pet087"}}))
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Pets"):WaitForChild("Re_Hatch"):FireServer(unpack({"Hatch",eggshop,{"Pet086","Pet087","Pet088"}}))
         task.wait()
         rcount = rcount - 1
     until not _G.auto3 or rcount <= 0
@@ -155,7 +155,7 @@ window:Toggle("Quick Fight", false, function(bool)
     _G.auto2 = bool
     task_defer(autoFight(_G.enemytemp))
 end)
-
+window2:Label("Tower Rooms", Color3.fromRGB(90, 255, 166))
 window:Toggle("Quick Tower", false, function(bool)
     _G.auto4 = bool
     task_defer(autoTower())
