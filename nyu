@@ -86,15 +86,13 @@ end
 
 function autoFight(tablesvar)
     while _G.auto2 do
-        local repeatCount = 1000
-        for i=1,7 do
-            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(1)
-            task.wait()
-        end
+        local repeatCount = 200
+        --game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(1)
+        --task.wait()
         repeat
             for i, v in pairs(enemyTable[tablesvar]) do
-                --game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(i)
-                --task.wait()
+                game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(1)
+                task.wait()
                 local npc = "Npc"
                 npc = npc .. string.format("%03d", v)
                 game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_TakeDamage"):FireServer(unpack({npc,1}))
@@ -104,11 +102,6 @@ function autoFight(tablesvar)
             task.wait()
             repeatCount = repeatCount - 1
         until not _G.auto2 or repeatCount <= 0
-    end
-    if not _G.auto2 then
-        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Rf_ChallengeFinish"):InvokeServer()
-        task.wait()
-
     end
 end
 
