@@ -6,7 +6,6 @@ _G.auto3 = false
 _G.auto5 = false
 _G.auto6 = false
 local task_defer = task.defer
-
 _G.enemytemp = "001"
 _G.eggmaptemp = "001"
 _G.eggshoptemp = {}
@@ -87,7 +86,7 @@ end
 
 function autoFight(tablesvar)
     while _G.auto2 do
-        local repeatCount = 200
+        local repeatCount = 1000
         for i=1,7 do
             game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(1)
             task.wait()
