@@ -55,14 +55,14 @@ end
 function autoTower()
     while _G.auto4 do
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer(true)
-        --game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer()
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer()
         task.wait()
         local rcount = 300
         repeat
             for i=1,3 do
             game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_TakeDamage"):FireServer(i)
-            end
             task.wait()
+            end
             rcount = rcount - 1
         until not _G.auto4 or rcount <= 0
     end
@@ -71,9 +71,9 @@ end
 
 function autoFight(tablesvar)
     while _G.auto2 do
-        local repeatCount = 400
+        local repeatCount = 600
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(1)
-        task.wait(0.5)
+        task.wait()
         repeat
             for i, v in pairs(enemyTable[tablesvar]) do
                 local npc = "Npc"
