@@ -1,6 +1,5 @@
 
 _G.auto4 = false
-
 _G.auto2 = false
 _G.auto1 = false
 _G.auto3 = false
@@ -150,7 +149,6 @@ window:Toggle("Quick Fight", false, function(bool)
     task_defer(autoFight(_G.enemytemp))
 end)
 
-end)
 window:Toggle("Quick Tower", false, function(bool)
     _G.auto4 = bool
     task_defer(autoTower())
