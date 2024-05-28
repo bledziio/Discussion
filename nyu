@@ -4,6 +4,7 @@ _G.auto2 = false
 _G.auto1 = false
 _G.auto3 = false
 _G.auto5 = false
+_G.auto6 = false
 local task_defer = task.defer
 _G.enemytemp = "001"
 _G.eggmaptemp = "001"
@@ -52,12 +53,12 @@ function autoTrain()
     end
 end
 
-function autoTower(times)
+function autoTower()
     while _G.auto4 do
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer(true)
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer()
         task.wait()
-        local rcount = times
+        local rcount = 600
         repeat
             for i=1,3 do
             game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_TakeDamage"):FireServer(i)
@@ -67,11 +68,25 @@ function autoTower(times)
         until not _G.auto4 or rcount <= 0
     end
 end
+function autoTower2()
+    while _G.auto6 do
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer(true)
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer()
+        task.wait()
+        local rcount = 1200
+        repeat
+            for i=1,3 do
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_TakeDamage"):FireServer(i)
+            task.wait()
+            end
+            rcount = rcount - 1
+        until not _G.auto6 or rcount <= 0
+    end
+end
 
-
-function autoFight(tablesvar,times)
+function autoFight(tablesvar)
     while _G.auto2 do
-        local repeatCount = times
+        local repeatCount = 400
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(1)
         task.wait()
         repeat
@@ -85,6 +100,24 @@ function autoFight(tablesvar,times)
             task.wait()
             repeatCount = repeatCount - 1
         until not _G.auto2 or repeatCount <= 0
+    end
+end
+function autoFight2(tablesvar)
+    while _G.auto5 do
+        local repeatCount = 800
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(1)
+        task.wait()
+        repeat
+            for i, v in pairs(enemyTable[tablesvar]) do
+                local npc = "Npc"
+                npc = npc .. string.format("%03d", v)
+                game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_TakeDamage"):FireServer(unpack({npc,1}))
+                game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_TakeDamage"):FireServer(unpack({npc,2}))
+                game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_TakeDamage"):FireServer(unpack({npc,3}))
+            end
+            task.wait()
+            repeatCount = repeatCount - 1
+        until not _G.auto5 or repeatCount <= 0
     end
 end
 
@@ -127,38 +160,38 @@ end)
 window:Dropdown("Choose World",mapTable , function(name)
     _G.enemytemp = pickmaptable(name)
 end)
-window2:Toggle("Quick Fight", false, function(bool)
+window:Toggle("Quick Fight", false, function(bool)
     _G.auto2 = bool
-    task_defer(autoFight(_G.enemytemp),400)
+    task_defer(autoFight(_G.enemytemp))
 end)
-window2:Toggle("Long Fight", false, function(bool)
-    _G.auto2 = bool
-    task_defer(autoFight(_G.enemytemp),700)
+window:Toggle("Long Fight", false, function(bool)
+    _G.auto5 = bool
+    task_defer(autoFight2(_G.enemytemp))
 end)
-window2:Toggle("Quick Tower", false, function(bool)
+window:Toggle("Quick Tower", false, function(bool)
     _G.auto4 = bool
-    task_defer(autoTower(400))
+    task_defer(autoTower())
 end)
-window2:Toggle("Long Tower", false, function(bool)
-    _G.auto4 = bool
-    task_defer(autoTower(1200))
+window:Toggle("Long Tower", false, function(bool)
+    _G.auto6 = bool
+    task_defer(autoTower2())
 end)
 
-window:Label("Teleport", Color3.fromRGB(50, 200, 166))
-window:Dropdown("Teleport", mapTable, function(name)
+window2:Label("Teleport", Color3.fromRGB(50, 200, 166))
+window2:Dropdown("Teleport", mapTable, function(name)
     task_defer(teleportto(pickmaptable(name)))
 end)
 
-window:Label("Auto Hatch", Color3.fromRGB(255, 15, 166))
-window:Dropdown("Pick Egg World", mapTable, function(name)
+window2:Label("Auto Hatch", Color3.fromRGB(255, 15, 166))
+window2:Dropdown("Pick Egg World", mapTable, function(name)
     _G.eggmaptemp = pickmaptable(name)
     _G.eggshoptemp = pickmaptable(_G.eggmaptemp)
 
 end) 
-window:Dropdown("Choose Egg Shop", {1,2,3,4}, function(name)
+window2:Dropdown("Choose Egg Shop", {1,2,3,4}, function(name)
     _G.eggshoptempval =  _G.eggshoptemp[name]
 end)
-window:Toggle("Hatch Eggs", false, function(bool)
+window2:Toggle("Hatch Eggs", false, function(bool)
     _G.auto3 = bool
     task_defer(hatcheggs(_G.eggshoptempval))
 end)
