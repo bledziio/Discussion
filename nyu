@@ -48,6 +48,8 @@ function autoTrain()
             local trainer = "TrainPower"
             trainer = trainer .. string.format("%03d", i * 7)
             game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Game"):WaitForChild("Re_TrainPower"):FireServer("TrainPower041")
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Game"):WaitForChild("Re_TrainPower"):FireServer(trainer)
+
         end    
         task.wait()
     end
