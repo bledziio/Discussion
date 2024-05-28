@@ -47,9 +47,17 @@ function autoTrain()
         for i=1,6 do
             local trainer = "TrainPower"
             trainer = trainer .. string.format("%03d", i * 7)
-            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Game"):WaitForChild("Re_TrainPower"):FireServer("TrainPower041")
             game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Game"):WaitForChild("Re_TrainPower"):FireServer(trainer)
-
+        end    
+        task.wait()
+    end
+end
+function autoTrain2()
+    while _G.auto5 do
+        for i=1,6 do
+            local trainer = "TrainPower"
+            trainer = trainer .. string.format("%03d", i * 7)
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Game"):WaitForChild("Re_TrainPower"):FireServer("TrainPower041")
         end    
         task.wait()
     end
@@ -146,9 +154,13 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bledz
 local window = library:Window("Window")
 local window2 = library:Window("Window")
 window:Label("AutoFarm", Color3.fromRGB(127, 200, 25))
-window:Toggle("Train", false, function(bool)
+window:Toggle("VIP Train", false, function(bool)
     _G.auto1 = bool
     task_defer(autoTrain())
+end)
+window:Toggle("Max Train", false, function(bool)
+    _G.auto5 = bool
+    task_defer(autoTrain2())
 end)
 window:Dropdown("Choose World",mapTable , function(name)
     _G.enemytemp = pickmaptable(name)
