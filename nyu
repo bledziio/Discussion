@@ -93,6 +93,9 @@ function autoTower2()
             task.wait()
             end
             rcount = rcount - 1
+            if rcount == 10 then 
+                game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(game:GetService("ReplicatedStorage").TowerAreas.Areas["3"].pasted__Candle12_pasted__Candle_body4))
+            end
         until not _G.auto6 or rcount <= 0
     end
 end
