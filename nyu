@@ -84,7 +84,9 @@ function autoTower2()
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer(true)
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer()
         task.wait()
-        local rcount = 1200
+        game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(game:GetService("ReplicatedStorage").TowerAreas.Areas["3"].pasted__Candle12_pasted__Candle_body4))
+
+        local rcount = 100
         repeat
             for i=1,3 do
             game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_TakeDamage"):FireServer(i)
