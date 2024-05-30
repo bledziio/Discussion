@@ -184,6 +184,12 @@ window:Toggle("Long Tower", false, function(bool)
     task_defer(autoTower2())
 end)
 
+window:Button("HighGround", function()
+    game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(game:GetService("ReplicatedStorage").TowerAreas.Areas["3"].pasted__Candle12_pasted__Candle_body4))
+    task.wait()
+ end)
+
+
 window2:Label("Teleport", Color3.fromRGB(50, 200, 166))
 window2:Dropdown("Teleport", mapTable, function(name)
     task_defer(teleportto(pickmaptable(name)))
