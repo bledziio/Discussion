@@ -10,6 +10,7 @@ _G.enemytemp = "001"
 _G.eggmaptemp = "001"
 _G.eggshoptemp = {}
 _G.eggshoptempval = "001"
+_G.towertimer = 50
 local eggTable = {
     ["001"] = { "001", "002", "003", "004" },
     ["002"] = { "005", "006", "007", "008" },
@@ -54,11 +55,7 @@ function autoTrain()
 end
 function autoTrain2()
     while _G.auto5 do
-        for i=1,6 do
-            local trainer = "TrainPower"
-            trainer = trainer .. string.format("%03d", i * 7)
-            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Game"):WaitForChild("Re_TrainPower"):FireServer("TrainPower041")
-        end    
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Game"):WaitForChild("Re_TrainPower"):FireServer("TrainPower041")
         task.wait()
     end
 end
@@ -79,12 +76,12 @@ function autoTower()
         task.wait()
     end
 end
-function autoTower2()
+function autoTower2(timer)
     while _G.auto6 do
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer(true)
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer()
         task.wait()
-        local rcount = 2500
+        local rcount = timer
         repeat
             for i=1,3 do
             game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_TakeDamage"):FireServer(i)
@@ -150,6 +147,17 @@ function teleportto(var)
     game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("World"):WaitForChild("Rf_TeleportToWorld"):InvokeServer(world)
 end
 
+_G.auto7 = false
+function openboxes()
+    while _G.auto7 do
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Hatch"):FireServer(unpack({"Hatch","Box001"}))
+        task.wait()
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Hatch"):FireServer(unpack({"Hatch","Box002"}))
+        task.wait()
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Hatch"):FireServer(unpack({"Hatch","Box003"}))
+        task.wait()
+    end
+end
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bledziio/Discussion/master/turtlegui"))()
 local window = library:Window("Window")
 local window2 = library:Window("Window")
@@ -174,14 +182,26 @@ window:Toggle("Quick Tower", false, function(bool)
     _G.auto4 = bool
     task_defer(autoTower())
 end)
+window:Box("Set timer", function(text, focuslost)
+    if focuslost then
+        _G.towertimer = text
+    end
+ end)
 window:Toggle("Long Tower", false, function(bool)
     _G.auto6 = bool
-    task_defer(autoTower2())
+    task_defer(autoTower2(_G.towertimer))
 end)
-
-window:Button("HighGround", function()
-    game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(game:GetService("ReplicatedStorage").TowerAreas.Areas["3"].pasted__Candle12_pasted__Candle_body4))
-    task.wait()
+window:Toggle("Claim/Open Tower Boxes", false, function(bool)
+    _G.auto7 = bool
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_ClaimFloorReward"):FireServer()
+    task_defer(openboxes())
+end)
+window:Button("Claim Online Gift", function()
+    for i=1,12 do
+        local gift ="OnlineGift" .. string.format("%03d", i)
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Stats"):WaitForChild("Re_ClaimOnline"):FireServer(gift)
+        task.wait()
+    end
  end)
 
 
