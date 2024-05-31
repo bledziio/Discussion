@@ -173,7 +173,7 @@ function dosecretBoss()
             task.wait()
         end
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Rf_Finish"):InvokeServer()
-        task.wait(3)
+        task.wait(1.5)
     end
 end        
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bledziio/Discussion/master/turtlegui"))()
