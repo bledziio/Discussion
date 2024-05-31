@@ -193,7 +193,7 @@ window:Toggle("Quick Fight", false, function(bool)
 end)
 window:Toggle("secret Boss Fight", false, function(bool)
     _G.auto8 = bool
-    task_defer(dosecretBoss)
+    task_defer(dosecretBoss())
 end)
 window:Label("Tower Rooms", Color3.fromRGB(90, 255, 166))
 window:Toggle("Quick Tower", false, function(bool)
