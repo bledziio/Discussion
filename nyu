@@ -164,19 +164,16 @@ end
 _G.auto8 = false
 function dosecretBoss()
     while _G.auto8 do
-        
-        for i=4,1 do
-            local secretboss = "SecretBoss" .. string.format("%03d", i)
-            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_Start"):FireServer(secretboss)
-            task.wait(2)
+        for i=1,4 do
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_Start"):FireServer("SecretBoss004")
+            task.wait()
             game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(1)
             game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(2)
             game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(3)
             task.wait()
-            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Rf_Finish"):InvokeServer()
-            task.wait(2)
         end
-
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Rf_Finish"):InvokeServer()
+        task.wait(6)
     end
 end        
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bledziio/Discussion/master/turtlegui"))()
