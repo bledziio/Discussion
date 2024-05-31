@@ -120,7 +120,7 @@ function hatcheggs(var)
     while _G.auto3 do
         local rcount = 300
         repeat 
-        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Pets"):WaitForChild("Re_Hatch"):FireServer(unpack({"Hatch",eggshop,{"Pet086","Pet087","Pet088"}}))
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Pets"):WaitForChild("Re_Hatch"):FireServer(unpack({"Hatch",eggshop,{"Pet094","Pet095","Pet096"}}))
         task.wait()
         rcount = rcount - 1
     until not _G.auto3 or rcount <= 0
