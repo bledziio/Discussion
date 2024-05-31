@@ -163,7 +163,7 @@ function openboxes()
 end
 _G.auto8 = false
 function dosecretBoss()
-    \while _G.auto8 do
+    while _G.auto8 do
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_Start"):FireServer("SecretBoss004")
         task.wait()
         for i=1,3 do
