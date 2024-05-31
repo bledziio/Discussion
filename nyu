@@ -38,7 +38,7 @@ for i = 29, 35 do table.insert(enemyTable["005"], string.format("%03d", i)) end
 enemyTable["006"] = {}
 for i = 36, 42 do table.insert(enemyTable["006"], string.format("%03d", i)) end
 enemyTable["007"] = {}
-for i = 43, 49 do table.insert(enemyTable["006"], string.format("%03d", i)) end
+for i = 43, 49 do table.insert(enemyTable["007"], string.format("%03d", i)) end
 
 --local enemykeysOnly = {} -- Initialize an empty table for keys
 --for key, _ in pairs(enemyTable) do table.insert(enemykeysOnly, key)  end
