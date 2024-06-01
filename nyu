@@ -166,13 +166,14 @@ function dosecretBoss()
     while _G.auto8 do
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_Start"):FireServer("SecretBoss004")
         task.wait()
-        for i=50,1 do
+        for i=6,1 do
             game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(1)
             game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(2)
             game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(3)
             task.wait()
         end
-        task.wait(2)
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Rf_Finish"):InvokeServer()
+        task.wait(4)
         if not _G.auto8 then
             game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Rf_Finish"):InvokeServer()
         end
@@ -198,7 +199,7 @@ window:Toggle("Quick Fight", false, function(bool)
     _G.auto2 = bool
     task_defer(autoFight(_G.enemytemp))
 end)
-window:Toggle("secret Boss Fight 4", false, function(bool)
+window:Toggle("secret Boss Fight", false, function(bool)
     _G.auto8 = bool
     task_defer(dosecretBoss())
 end)
