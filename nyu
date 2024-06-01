@@ -247,7 +247,15 @@ window2:Toggle("Hatch Eggs", false, function(bool)
     _G.auto3 = bool
     task_defer(hatcheggs(_G.eggshoptempval))
 end)
-
+window2:Button("Winx2", function()
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Item"):WaitForChild("Re_UsePotion"):FireServer(unpack("Item001"))
+end)
+window2:Button("Powerx2", function()
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Item"):WaitForChild("Re_UsePotion"):FireServer(unpack("Item002"))
+end)
+window2:Button("Luckx2", function()
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Item"):WaitForChild("Re_UsePotion"):FireServer(unpack("Item003"))
+end)
 
 library:Keybind("P")
 
