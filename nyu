@@ -71,8 +71,8 @@ function autoTower()
         repeat
             for i=1,3 do
             game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_TakeDamage"):FireServer(i)
-            task.wait()
             end
+            task.wait()
             rcount = rcount - 1
         until not _G.auto4 or rcount <= 0
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer()
@@ -80,18 +80,14 @@ function autoTower()
     end
 end
 function autoTower2()
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer(true)
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer()
+    task.wait()
     while _G.auto6 do
-        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer(true)
-        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer()
+        for i=1,3 do
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_TakeDamage"):FireServer(i)
+        end
         task.wait()
-        local rcount = _G.towertimer
-        repeat
-            for i=1,3 do
-            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_TakeDamage"):FireServer(i)
-            end
-            task.wait()
-            rcount = rcount - 1
-        until not _G.auto6 or rcount <= 0
     end
 end
 
