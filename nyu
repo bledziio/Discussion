@@ -235,7 +235,7 @@ window2:Dropdown("Pick Egg World", mapTable, function(name)
     _G.eggshoptemp = pickmaptable(_G.eggmaptemp)
 
 end) 
-window2:Dropdown("Choose Egg Shop", {1,2,3,4}, function(name)
+window2:Dropdown("Cchoose Egg Shop", {1,2,3,4}, function(name)
     _G.eggshoptempval =  _G.eggshoptemp[name]
 end)
 window2:Toggle("Hatch Eggs", false, function(bool)
