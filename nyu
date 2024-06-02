@@ -6,10 +6,10 @@ _G.auto3 = false
 _G.auto5 = false
 _G.auto6 = false
 local task_defer = task.defer
-_G.enemytemp = "001"
-_G.eggmaptemp = "001"
+_G.enemytemp = "007"
+_G.eggmaptemp = "006"
 _G.eggshoptemp = {}
-_G.eggshoptempval = "001"
+_G.eggshoptempval = "024"
 _G.towertimer = 10000
 local eggTable = {
     ["001"] = { "001", "002", "003", "004" },
@@ -17,8 +17,8 @@ local eggTable = {
     ["003"] = { "009", "010", "011", "012" },
     ["004"] = { "013", "014", "015", "016" },
     ["005"] = { "017", "018", "019", "020" },
-    ["006"] = { "021", "022", "023", "024" },
-    ["007"] = { "025", "026", "027", "028" },
+    ["006"] = { "021", "022", "024", "024" },
+    ["007"] = { "023", "024", "024", "024" },
     -- Add more mappings as needed
 }
 --local eggkeysOnly = {} -- Initialize an empty table for keys
@@ -197,20 +197,19 @@ window:Toggle("secret Boss 4", false, function(bool)
     _G.auto8 = bool
     task_defer(dosecretBoss())
 end)
+
 window:Label("Tower Rooms", Color3.fromRGB(90, 255, 166))
 window:Toggle("Quick Tower", false, function(bool)
     _G.auto4 = bool
     task_defer(autoTower())
 end)
-window:Box("Set timer", function(text, focuslost)
-    if focuslost then
-        _G.towertimer = text
-    end
- end)
 window:Toggle("Long Tower", false, function(bool)
     _G.auto6 = bool
     task_defer(autoTower2())
 end)
+window:Button("Leave Tower", function()
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Rf_ChallengeFinish"):InvokeServer()
+ end)
 window:Toggle("Claim/Open Tower Boxes", false, function(bool)
     _G.auto7 = bool
     game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_ClaimFloorReward"):FireServer()
