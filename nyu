@@ -89,7 +89,15 @@ function autoTower2()
         task.wait()
     end
 end
-
+_G.newauto
+function towerAutoAttack()
+    while _G.newauto do
+        for i=1,3 do
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_TakeDamage"):FireServer(i)
+        end
+        task.wait()
+    end
+end
 function autoFight(tablesvar)
     while _G.auto2 do
         for i, v in pairs(enemyTable[tablesvar]) do
@@ -174,8 +182,10 @@ function dosecretBoss()
     end
 end        
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bledziio/Discussion/master/turtlegui"))()
-local window = library:Window("Window")
-local window2 = library:Window("Window")
+local window = library:Window("Train")
+local window2 = library:Window("Pet/Misc")
+local window3 = library:Window("Tower")
+
 window:Label("AutoFarm", Color3.fromRGB(127, 200, 25))
 window:Toggle("VIP Train", false, function(bool)
     _G.auto1 = bool
@@ -197,40 +207,48 @@ window:Toggle("secret Boss 4", false, function(bool)
     task_defer(dosecretBoss())
 end)
 
-window:Label("Tower Rooms", Color3.fromRGB(90, 255, 166))
-window:Toggle("Easy Tower Rooms", false, function(bool)
+window3:Label("Tower Rooms", Color3.fromRGB(90, 255, 166))
+window3:Toggle("Easy Tower Rooms", false, function(bool)
     _G.auto4 = bool
     task_defer(autoTower())
 end)
-window:Toggle("Difficult Tower", false, function(bool)
+window3:Toggle("timeless Tower", false, function(bool)
     _G.auto6 = bool
     task_defer(autoTower2())
 end)
-window:Button("Next Room", function()
+window3:Toggle("Tower Auto Attack", false, function(bool)
+    _G.newauto = bool
+    task_defer(towerAutoAttack())
+end)
+window3:Button("Next Room", function()
     game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer()
 end)
-window:Button("Leave Tower", function()
+window3:Button("Leave Tower", function()
     game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Rf_ChallengeFinish"):InvokeServer()
  end)
-window:Toggle("Claim/Open Tower Boxes", false, function(bool)
+window3:Toggle("Claim/Open Tower Boxes", false, function(bool)
     _G.auto7 = bool
     game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_ClaimFloorReward"):FireServer()
     task_defer(openboxes())
 end)
-window:Button("Claim Online Gift", function()
+
+window2:Label("Misc", Color3.fromRGB(50, 20, 66))
+window2:Button("Claim Online Gift", function()
     for i=1,12 do
         local gift ="OnlineGift" .. string.format("%03d", i)
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Stats"):WaitForChild("Re_ClaimOnline"):FireServer(gift)
         task.wait()
     end
  end)
-
-
-window2:Label("Teleport", Color3.fromRGB(50, 200, 166))
-window2:Dropdown("Teleport", mapTable, function(name)
-    task_defer(teleportto(pickmaptable(name)))
+window2:Button("Winx2", function()
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Item"):WaitForChild("Re_UsePotion"):FireServer("Item001")
 end)
-
+window2:Button("Powerx2", function()
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Item"):WaitForChild("Re_UsePotion"):FireServer("Item002")
+end)
+window2:Button("Luckx2", function()
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Item"):WaitForChild("Re_UsePotion"):FireServer("Item003")
+end)
 window2:Label("Auto Hatch", Color3.fromRGB(255, 15, 166))
 window2:Dropdown("Pick Egg World", mapTable, function(name)
     _G.eggmaptemp = pickmaptable(name)
@@ -244,16 +262,10 @@ window2:Toggle("Hatch Eggs", false, function(bool)
     _G.auto3 = bool
     task_defer(hatcheggs(_G.eggshoptempval))
 end)
-window2:Button("Winx2", function()
-    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Item"):WaitForChild("Re_UsePotion"):FireServer("Item001")
+window2:Label("Teleport", Color3.fromRGB(50, 200, 166))
+window2:Dropdown("Teleport", mapTable, function(name)
+    task_defer(teleportto(pickmaptable(name)))
 end)
-window2:Button("Powerx2", function()
-    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Item"):WaitForChild("Re_UsePotion"):FireServer("Item002")
-end)
-window2:Button("Luckx2", function()
-    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Item"):WaitForChild("Re_UsePotion"):FireServer("Item003")
-end)
-
 library:Keybind("P")
 
 
