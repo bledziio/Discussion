@@ -10,7 +10,6 @@ _G.enemytemp = "007"
 _G.eggmaptemp = "006"
 _G.eggshoptemp = {}
 _G.eggshoptempval = "024"
-_G.towertimer = 10000
 local eggTable = {
     ["001"] = { "001", "002", "003", "004" },
     ["002"] = { "005", "006", "007", "008" },
@@ -178,7 +177,6 @@ function dosecretBoss()
             rcount=rcount-1
         until rcount <= 0
         task.wait(5)
-        
     end
 end        
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bledziio/Discussion/master/turtlegui"))()
@@ -195,8 +193,8 @@ window:Toggle("Max Train", false, function(bool)
     _G.auto5 = bool
     task_defer(autoTrain2())
 end)
-window:Dropdown("Choose World",mapTable , function(name)
-    _G.enemytemp = pickmaptable(name)
+window:Button("Candy World", function()
+    task_defer(teleportto("007"))
 end)
 window:Toggle("Quick Fight", false, function(bool)
     _G.auto2 = bool
@@ -250,19 +248,13 @@ window2:Button("Luckx2", function()
     game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Item"):WaitForChild("Re_UsePotion"):FireServer("Item003")
 end)
 window2:Label("Auto Hatch", Color3.fromRGB(255, 15, 166))
-window2:Dropdown("Pick Egg World", mapTable, function(name)
-    _G.eggmaptemp = pickmaptable(name)
-    _G.eggshoptemp = pickmaptable(_G.eggmaptemp)
 
-end) 
-window2:Dropdown("Choose Egg Shop", {1,2,3,4}, function(name)
-    _G.eggshoptempval =  _G.eggshoptemp[name]
-end)
-window2:Toggle("Hatch Eggs", false, function(bool)
+window2:Toggle("Hatch Best Eggs", false, function(bool)
     _G.auto3 = bool
     task_defer(hatcheggs(_G.eggshoptempval))
 end)
 window2:Label("Teleport", Color3.fromRGB(50, 200, 166))
+
 window2:Dropdown("Teleport", mapTable, function(name)
     task_defer(teleportto(pickmaptable(name)))
 end)
