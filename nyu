@@ -89,7 +89,7 @@ function autoTower2()
         task.wait()
     end
 end
-_G.newauto
+_G.newauto = false
 function towerAutoAttack()
     while _G.newauto do
         for i=1,3 do
