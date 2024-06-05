@@ -176,7 +176,8 @@ function dosecretBoss()
             task.wait()
             rcount=rcount-1
         until rcount <= 0
-        task.wait(5)
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Rf_Finish"):InvokeServer()
+        task.wait(1)
     end
 end        
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bledziio/Discussion/master/turtlegui"))()
@@ -200,7 +201,7 @@ window:Toggle("Quick Fight", false, function(bool)
     _G.auto2 = bool
     task_defer(autoFight(_G.enemytemp))
 end)
-window:Toggle("secret Boss 4", false, function(bool)
+window:Toggle("Super Secret", false, function(bool)
     _G.auto8 = bool
     task_defer(dosecretBoss())
 end)
