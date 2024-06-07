@@ -60,7 +60,7 @@ function autoTrain()
 end
 function autoTrain2()
     while _G.auto5 do
-        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Game"):WaitForChild("Re_TrainPower"):FireServer("TrainPower048")
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Game"):WaitForChild("Re_TrainPower"):FireServer("TrainPower055")
         task.wait()
     end
 end
