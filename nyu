@@ -155,11 +155,11 @@ end
 _G.auto7 = false
 function openboxes()
     while _G.auto7 do
-        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Hatch"):FireServer(unpack({"Hatch","Box001"}))
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Hatch"):FireServer(unpack({"Hatch","Box003"}))
         task.wait()
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Hatch"):FireServer(unpack({"Hatch","Box002"}))
         task.wait()
-        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Hatch"):FireServer(unpack({"Hatch","Box003"}))
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Hatch"):FireServer(unpack({"Hatch","Box001"}))
         task.wait()
     end
 end
