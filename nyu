@@ -216,7 +216,7 @@ window:Toggle("secret Boss 5", false, function(bool)
 end)
 
 window3:Label("Tower Rooms", Color3.fromRGB(90, 255, 166))
-window3:Toggle("Easy Tower Rooms", false, function(bool)
+window3:Toggle("Quick Auto", false, function(bool)
     _G.auto4 = bool
     task_defer(autoTower())
 end)
