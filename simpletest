@@ -1,0 +1,122 @@
+_G.auto8 = false
+function dosecretBoss5()
+    while _G.auto8 do
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_Start"):FireServer("SecretBoss005")
+        task.wait(1.5)
+        local rcount = 80
+        repeat
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(1)
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(2)
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(3)
+            task.wait()
+            rcount=rcount-1
+        until rcount <= 0
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Rf_Finish"):InvokeServer()
+        task.wait()
+    end
+end 
+_G.auto9 = false
+function dosecretBoss4()
+    while _G.auto9 do
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_Start"):FireServer("SecretBoss004")
+        task.wait(1.5)
+        local rcount = 80
+        repeat
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(1)
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(2)
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(3)
+            task.wait()
+            rcount=rcount-1
+        until rcount <= 0
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Rf_Finish"):InvokeServer()
+        task.wait()
+    end
+end 
+_G.auto10 = false
+function dosecretBoss54()
+    while _G.auto10 do
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_Start"):FireServer("SecretBoss005")
+        task.wait(1.5)
+        local rcount = 80
+        repeat
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(1)
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(2)
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(3)
+            task.wait()
+            rcount=rcount-1
+        until rcount <= 0
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Rf_Finish"):InvokeServer()
+        task.wait()
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_Start"):FireServer("SecretBoss004")
+        task.wait(1.5)
+        local rcount = 80
+        repeat
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(1)
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(2)
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(3)
+            task.wait()
+            rcount=rcount-1
+        until rcount <= 0
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Rf_Finish"):InvokeServer()
+        task.wait()
+    end
+end 
+local library = loadstring(game.HttpGet(game, "https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/0x"))()
+local w1 = library:Window("sword",Vector2.new(500,500)) -- Text
+
+w1:Toggle(
+    "secret 5",
+    "Poer",
+    false,
+    function(toggled)
+        _G.auto8 = toggled
+        task_defer(dosecretBoss5())
+    end
+)
+w1:Toggle(
+    "secret 4",
+    "Poer",
+    false,
+    function(toggled)
+        _G.auto9 = toggled
+        task_defer(dosecretBoss4())
+    end
+)
+w1:Toggle(
+    "secret 4&5",
+    "Poer",
+    false,
+    function(toggled)
+        _G.auto10 = toggled
+        task_defer(dosecretBoss54())
+    end
+)
+w1:Button(
+    "secret 5",
+    function()
+        task_defer(dosecretBoss5())
+    end
+) --
+w1:Button(
+    "Secret 4",
+    function()
+        task_defer(dosecretBoss4())
+    end
+) -- Text, Callback
+            
+w1:Button(
+    "Secret 54",
+    function()
+        task_defer(dosecretBoss54())
+    end
+) -- Text, Callback
+w1:Button(
+    "Destroy GUI",
+    function()
+        for i, v in pairs(game.CoreGui:GetChildren()) do
+            if v:FindFirstChild("Top") then
+                v:Destroy()
+            end
+        end
+    end
+) -- Text, Callback
