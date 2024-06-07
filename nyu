@@ -45,12 +45,12 @@ for i = 43, 49 do table.insert(enemyTable["007"], string.format("%03d", i)) end
 --local enemykeysOnly = {} -- Initialize an empty table for keys
 --for key, _ in pairs(enemyTable) do table.insert(enemykeysOnly, key)  end
 
-local mapTable = {"Castle", "Mushroom", "Desert","SnowLand","Underwater","Alien","Candy"}
-local maptableindex = {"001", "002", "003", "004", "005", "006","007"}
+local mapTable = {"Castle", "Mushroom", "Desert","SnowLand","Underwater","Alien","Candy","Factory"}
+local maptableindex = {"001", "002", "003", "004", "005", "006","007", "008"}
 
 function autoTrain()
     while _G.auto1 do
-        for i=1,7 do
+        for i=1,8 do
             local trainer = "TrainPower"
             trainer = trainer .. string.format("%03d", i * 7)
             game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Game"):WaitForChild("Re_TrainPower"):FireServer(trainer)
@@ -125,7 +125,7 @@ function hatcheggs(var)
     while _G.auto3 do
         local rcount = 300
         repeat 
-        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Pets"):WaitForChild("Re_Hatch"):FireServer(unpack({"Hatch",eggshop,{"Pet102","Pet103","Pet104"}}))
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Pets"):WaitForChild("Re_Hatch"):FireServer(unpack({"Hatch",eggshop,{"Pet103","Pet104","Pet105"}}))
         task.wait()
         rcount = rcount - 1
     until not _G.auto3 or rcount <= 0
@@ -197,14 +197,14 @@ window:Toggle("Max Train", false, function(bool)
     _G.auto5 = bool
     task_defer(autoTrain2())
 end)
-window:Button("Candy World", function()
+window:Button("Factory World", function()
     task_defer(teleportto(lastmap))
 end)
 window:Toggle("Quick Fight", false, function(bool)
     _G.auto2 = bool
     task_defer(autoFight(_G.enemytemp))
 end)
-window:Toggle("secret Boss 4", false, function(bool)
+window:Toggle("secret Boss 5", false, function(bool)
     _G.auto8 = bool
     task_defer(dosecretBoss())
 end)
