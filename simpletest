@@ -118,8 +118,6 @@ function autoFight(tablesvar)
             game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_TakeDamage"):FireServer(unpack({npc,3}))
         end
         task.wait()
-    end
-    if not _G.auto2 then
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Rf_ChallengeFinish"):InvokeServer()
     end
 end
@@ -173,7 +171,7 @@ function openboxes()
     end
 end
 _G.auto8 = false
-_g.secretboss = "SecretBoss005"
+_G.secretboss = "SecretBoss005"
 function dosecretBoss(val)
     while _G.auto8 do
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_Start"):FireServer(val)
@@ -193,7 +191,7 @@ end
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bledziio/Discussion/master/turtlegui"))()
 local window = library:Window("Train")
 local window2 = library:Window("Pet/Misc")
-local window3 = library:Window("Will")
+local window3 = library:Window("Tower")
 
 window:Label("AutoFarm", Color3.fromRGB(127, 200, 25))
 window:Toggle("VIP Train", false, function(bool)
@@ -275,8 +273,8 @@ window2:Toggle("Hatch Eggs", false, function(bool)
     task_defer(hatcheggs(_G.eggshoptempval))
 end)
 window2:Label("Teleport", Color3.fromRGB(50, 200, 166))
-window2:Button("Candy World", function()
-    task_defer(teleportto("007"))
+window2:Button("Last World", function()
+    task_defer(teleportto("008"))
 end)
 window2:Dropdown("Teleport", mapTable, function(name)
     task_defer(teleportto(pickmaptable(name)))
