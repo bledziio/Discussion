@@ -187,7 +187,7 @@ function dosecretBoss(val)
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Rf_Finish"):InvokeServer()
         task.wait()
     end
-end        
+end      
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bledziio/Discussion/master/turtlegui"))()
 local window = library:Window("Train")
 local window2 = library:Window("Pet/Misc")
@@ -202,17 +202,17 @@ window:Toggle("Max Train", false, function(bool)
     _G.auto5 = bool
     task_defer(autoTrain2())
 end)
-window:Dropdown("Choose World",mapTable , function(name)
-    _G.enemytemp = pickmaptable(name)
+window:Button("Factory World", function()
+    task_defer(teleportto(lastmap))
 end)
 window:Toggle("Quick Fight", false, function(bool)
     _G.auto2 = bool
     task_defer(autoFight(_G.enemytemp))
 end)
-window:Dropdown("Choose Secret Boss",{"SecretBoss005","SecretBoss004","SecretBoss003","SecretBoss002","SecretBoss001"} , function(name)
+window:Dropdown("secret boss", mapTable, function(name)
     _G.secretboss = name
 end)
-window:Toggle("Fight secret Boss", false, function(bool)
+window:Toggle("secret Boss auto", false, function(bool)
     _G.auto8 = bool
     task_defer(dosecretBoss(_G.secretboss))
 end)
@@ -268,14 +268,12 @@ end)
 window2:Dropdown("Choose Egg Shop", {1,2,3,4}, function(name)
     _G.eggshoptempval =  _G.eggshoptemp[name]
 end)
-window2:Toggle("Hatch Eggs", false, function(bool)
+window2:Toggle("Hatch Best Eggs", false, function(bool)
     _G.auto3 = bool
     task_defer(hatcheggs(_G.eggshoptempval))
 end)
 window2:Label("Teleport", Color3.fromRGB(50, 200, 166))
-window2:Button("Last World", function()
-    task_defer(teleportto("008"))
-end)
+
 window2:Dropdown("Teleport", mapTable, function(name)
     task_defer(teleportto(pickmaptable(name)))
 end)
