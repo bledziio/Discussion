@@ -1,122 +1,295 @@
-_G.auto8 = false
-function dosecretBoss5()
-    while _G.auto8 do
-        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_Start"):FireServer("SecretBoss005")
-        task.wait(1.5)
-        local rcount = 80
-        repeat
-            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(1)
-            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(2)
-            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(3)
-            task.wait()
-            rcount=rcount-1
-        until rcount <= 0
-        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Rf_Finish"):InvokeServer()
-        task.wait()
-    end
-end 
-_G.auto9 = false
-function dosecretBoss4()
-    while _G.auto9 do
-        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_Start"):FireServer("SecretBoss004")
-        task.wait(1.5)
-        local rcount = 80
-        repeat
-            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(1)
-            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(2)
-            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(3)
-            task.wait()
-            rcount=rcount-1
-        until rcount <= 0
-        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Rf_Finish"):InvokeServer()
-        task.wait()
-    end
-end 
-_G.auto10 = false
-function dosecretBoss54()
-    while _G.auto10 do
-        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_Start"):FireServer("SecretBoss005")
-        task.wait(1.5)
-        local rcount = 80
-        repeat
-            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(1)
-            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(2)
-            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(3)
-            task.wait()
-            rcount=rcount-1
-        until rcount <= 0
-        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Rf_Finish"):InvokeServer()
-        task.wait()
-        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_Start"):FireServer("SecretBoss004")
-        task.wait(1.5)
-        local rcount = 80
-        repeat
-            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(1)
-            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(2)
-            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(3)
-            task.wait()
-            rcount=rcount-1
-        until rcount <= 0
-        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Rf_Finish"):InvokeServer()
-        task.wait()
-    end
-end 
-local library = loadstring(game.HttpGet(game, "https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/0x"))()
-local w1 = library:Window("sword",Vector2.new(500,500)) -- Text
 
-w1:Toggle(
-    "secret 5",
-    "Poer",
-    false,
-    function(toggled)
-        _G.auto8 = toggled
-        task_defer(dosecretBoss5())
+_G.auto4 = false
+_G.auto2 = false
+_G.auto1 = false
+_G.auto3 = false
+_G.auto5 = false
+_G.auto6 = false
+local task_defer = task.defer
+local lastmap = "008"
+_G.enemytemp = lastmap
+_G.eggmaptemp = lastmap
+_G.eggshoptemp = {}
+_G.eggshoptempval = "026"
+
+local eggTable = {
+    ["001"] = { "001", "002", "003", "004" },
+    ["002"] = { "005", "006", "007", "008" },
+    ["003"] = { "009", "010", "011", "012" },
+    ["004"] = { "013", "014", "015", "016" },
+    ["005"] = { "017", "018", "019", "020" },
+    ["006"] = { "021", "022", "023", "024" },
+    ["007"] = { "025", "026", "026", "026" },
+    ["008"] = { "025", "026", "026", "026" },
+    -- Add more mappings as needed
+}
+--local eggkeysOnly = {} -- Initialize an empty table for keys
+--for key, _ in pairs(eggTable) do table.insert(eggkeysOnly, key)  end
+
+local enemyTable = {}
+enemyTable["001"] = {}
+for i = 1, 7 do table.insert(enemyTable["001"], string.format("%03d", i)) end
+enemyTable["002"] = {}
+for i = 8, 14 do table.insert(enemyTable["002"], string.format("%03d", i)) end
+enemyTable["003"] = {}
+for i = 15, 21 do table.insert(enemyTable["003"], string.format("%03d", i)) end
+enemyTable["004"] = {}
+for i = 22, 28 do table.insert(enemyTable["004"], string.format("%03d", i)) end
+enemyTable["005"] = {}
+for i = 29, 35 do table.insert(enemyTable["005"], string.format("%03d", i)) end
+enemyTable["006"] = {}
+for i = 36, 42 do table.insert(enemyTable["006"], string.format("%03d", i)) end
+enemyTable["007"] = {}
+for i = 43, 49 do table.insert(enemyTable["007"], string.format("%03d", i)) end
+enemyTable["008"] = {}
+for i = 50, 56 do table.insert(enemyTable["008"], string.format("%03d", i)) end
+enemyTable["009"] = {}
+for i = 57, 63 do table.insert(enemyTable["009"], string.format("%03d", i)) end
+enemyTable["010"] = {}
+for i = 64, 70 do table.insert(enemyTable["010"], string.format("%03d", i)) end
+
+--local enemykeysOnly = {} -- Initialize an empty table for keys
+--for key, _ in pairs(enemyTable) do table.insert(enemykeysOnly, key)  end
+
+local mapTable = {"Castle", "Mushroom", "Desert","SnowLand","Underwater","Alien","Candy","Factory"}
+local maptableindex = {"001", "002", "003", "004", "005", "006","007", "008"}
+
+function autoTrain()
+    while _G.auto1 do
+        for i=1,8 do
+            local trainer = "TrainPower"
+            trainer = trainer .. string.format("%03d", i * 7)
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Game"):WaitForChild("Re_TrainPower"):FireServer(trainer)
+        end    
+        task.wait()
     end
-)
-w1:Toggle(
-    "secret 4",
-    "Poer",
-    false,
-    function(toggled)
-        _G.auto9 = toggled
-        task_defer(dosecretBoss4())
+end
+function autoTrain2()
+    while _G.auto5 do
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Game"):WaitForChild("Re_TrainPower"):FireServer("TrainPower055")
+        task.wait()
     end
-)
-w1:Toggle(
-    "secret 4&5",
-    "Poer",
-    false,
-    function(toggled)
-        _G.auto10 = toggled
-        task_defer(dosecretBoss54())
-    end
-)
-w1:Button(
-    "secret 5",
-    function()
-        task_defer(dosecretBoss5())
-    end
-) --
-w1:Button(
-    "Secret 4",
-    function()
-        task_defer(dosecretBoss4())
-    end
-) -- Text, Callback
-            
-w1:Button(
-    "Secret 54",
-    function()
-        task_defer(dosecretBoss54())
-    end
-) -- Text, Callback
-w1:Button(
-    "Destroy GUI",
-    function()
-        for i, v in pairs(game.CoreGui:GetChildren()) do
-            if v:FindFirstChild("Top") then
-                v:Destroy()
+end
+
+function autoTower()
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer(true)
+    task.wait()
+    while _G.auto4 do
+        local rcount = 50
+        repeat
+            for i=1,3 do
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_TakeDamage"):FireServer(i)
             end
+            task.wait()
+            rcount = rcount - 1
+        until not _G.auto4 or rcount <= 0
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer()
+        task.wait()
+    end
+end
+function autoTower2()
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer(true)
+    task.wait()
+    while _G.auto6 do
+        for i=1,3 do
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_TakeDamage"):FireServer(i)
+        end
+        task.wait()
+    end
+end
+_G.newauto = false
+function towerAutoAttack()
+    while _G.newauto do
+        for i=1,3 do
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_TakeDamage"):FireServer(i)
+        end
+        task.wait()
+    end
+end
+function autoFight(tablesvar)
+    while _G.auto2 do
+        for i, v in pairs(enemyTable[tablesvar]) do
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(i)
+            task.wait()
+            local npc = "Npc"
+            npc = npc .. string.format("%03d", v)
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_TakeDamage"):FireServer(unpack({npc,1}))
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_TakeDamage"):FireServer(unpack({npc,2}))
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_TakeDamage"):FireServer(unpack({npc,3}))
+        end
+        task.wait()
+    end
+    if not _G.auto2 then
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Rf_ChallengeFinish"):InvokeServer()
+    end
+end
+
+
+function hatcheggs(var)
+    local eggshop = "Draw"
+    eggshop = eggshop .. var
+    while _G.auto3 do
+        local rcount = 300
+        repeat 
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Pets"):WaitForChild("Re_Hatch"):FireServer(unpack({"Hatch",eggshop,{"Pet103","Pet104","Pet105"}}))
+        task.wait()
+        rcount = rcount - 1
+    until not _G.auto3 or rcount <= 0
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Pets"):WaitForChild("Re_CraftAll"):FireServer()
+        task.wait()
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Pets"):WaitForChild("Re_EquipBest"):FireServer()
+        task.wait()
+    end
+end
+
+function pickmaptable(tablevar)
+    for i, v in pairs(mapTable) do
+        if v == tablevar then
+            return maptableindex[i]
         end
     end
-) -- Text, Callback
+    for i, v in pairs(maptableindex) do
+        if v == tablevar then
+            return eggTable[v]
+        end
+    end
+end
+
+function teleportto(var)
+    local world = "World"
+    world = world .. var
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("World"):WaitForChild("Rf_TeleportToWorld"):InvokeServer(world)
+end
+
+_G.auto7 = false
+function openboxes()
+    while _G.auto7 do
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Hatch"):FireServer(unpack({"Hatch","Box001"}))
+        task.wait()
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Hatch"):FireServer(unpack({"Hatch","Box002"}))
+        task.wait()
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Hatch"):FireServer(unpack({"Hatch","Box003"}))
+        task.wait()
+    end
+end
+_G.auto8 = false
+_g.secretboss = "SecretBoss005"
+function dosecretBoss(val)
+    while _G.auto8 do
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_Start"):FireServer(val)
+        task.wait(1.5)
+        local rcount = 80
+        repeat
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(1)
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(2)
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_TakeDamage"):FireServer(3)
+            task.wait()
+            rcount=rcount-1
+        until rcount <= 0
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Rf_Finish"):InvokeServer()
+        task.wait()
+    end
+end        
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bledziio/Discussion/master/turtlegui"))()
+local window = library:Window("Train")
+local window2 = library:Window("Pet/Misc")
+local window3 = library:Window("Tower")
+
+window:Label("AutoFarm", Color3.fromRGB(127, 200, 25))
+window:Toggle("VIP Train", false, function(bool)
+    _G.auto1 = bool
+    task_defer(autoTrain())
+end)
+window:Toggle("Max Train", false, function(bool)
+    _G.auto5 = bool
+    task_defer(autoTrain2())
+end)
+window:Dropdown("Choose World",mapTable , function(name)
+    _G.enemytemp = pickmaptable(name)
+end)
+window:Toggle("Quick Fight", false, function(bool)
+    _G.auto2 = bool
+    task_defer(autoFight(_G.enemytemp))
+end)
+window:Dropdown("Choose Secret Boss",{"SecretBoss005","SecretBoss004","SecretBoss003","SecretBoss002","SecretBoss001"} , function(name)
+    _G.secretboss = name
+end)
+window:Toggle("Fight secret Boss", false, function(bool)
+    _G.auto8 = bool
+    task_defer(dosecretBoss(_G.secretboss))
+end)
+
+window3:Label("Tower Rooms", Color3.fromRGB(90, 255, 166))
+window3:Toggle("Easy Tower Rooms", false, function(bool)
+    _G.auto4 = bool
+    task_defer(autoTower())
+end)
+window3:Toggle("timeless Tower", false, function(bool)
+    _G.auto6 = bool
+    task_defer(autoTower2())
+end)
+window3:Toggle("Tower Auto Attack", false, function(bool)
+    _G.newauto = bool
+    task_defer(towerAutoAttack())
+end)
+window3:Button("Next Room", function()
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_Challenge"):FireServer()
+end)
+window3:Button("Leave Tower", function()
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Rf_ChallengeFinish"):InvokeServer()
+ end)
+window3:Toggle("Claim/Open Tower Boxes", false, function(bool)
+    _G.auto7 = bool
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Tower"):WaitForChild("Re_ClaimFloorReward"):FireServer()
+    task_defer(openboxes())
+end)
+
+window2:Label("Misc", Color3.fromRGB(50, 20, 66))
+window2:Button("Claim Online Gift", function()
+    for i=1,12 do
+        local gift ="OnlineGift" .. string.format("%03d", i)
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Stats"):WaitForChild("Re_ClaimOnline"):FireServer(gift)
+        task.wait()
+    end
+ end)
+window2:Button("Winx2", function()
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Item"):WaitForChild("Re_UsePotion"):FireServer("Item001")
+end)
+window2:Button("Powerx2", function()
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Item"):WaitForChild("Re_UsePotion"):FireServer("Item002")
+end)
+window2:Button("Luckx2", function()
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Item"):WaitForChild("Re_UsePotion"):FireServer("Item003")
+end)
+window2:Label("Auto Hatch", Color3.fromRGB(255, 15, 166))
+window2:Dropdown("Pick Egg World", mapTable, function(name)
+    _G.eggmaptemp = pickmaptable(name)
+    _G.eggshoptemp = pickmaptable(_G.eggmaptemp)
+
+end) 
+window2:Dropdown("Choose Egg Shop", {1,2,3,4}, function(name)
+    _G.eggshoptempval =  _G.eggshoptemp[name]
+end)
+window2:Toggle("Hatch Eggs", false, function(bool)
+    _G.auto3 = bool
+    task_defer(hatcheggs(_G.eggshoptempval))
+end)
+window2:Label("Teleport", Color3.fromRGB(50, 200, 166))
+window2:Button("Candy World", function()
+    task_defer(teleportto("007"))
+end)
+window2:Dropdown("Teleport", mapTable, function(name)
+    task_defer(teleportto(pickmaptable(name)))
+end)
+library:Keybind("P")
+
+
+
+
+
+
+
+
+
+
+
