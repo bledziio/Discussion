@@ -121,7 +121,7 @@ function autoFight(tablesvar)
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Rf_ChallengeFinish"):InvokeServer()
     end
 end
-_G.slowfight - false
+_G.slowfight = false
 function slowautoFight(tablesvar)
     game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(i)
     task.wait()
