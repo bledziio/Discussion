@@ -121,7 +121,25 @@ function autoFight(tablesvar)
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Rf_ChallengeFinish"):InvokeServer()
     end
 end
-
+_G.slowfight - false
+function autoFight(tablesvar)
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(i)
+    task.wait()
+    while _G.slowfight do
+        for i, v in pairs(enemyTable[tablesvar]) do
+            local npc = "Npc"
+            npc = npc .. string.format("%03d", v)
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_TakeDamage"):FireServer(unpack({npc,1}))
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_TakeDamage"):FireServer(unpack({npc,2}))
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_TakeDamage"):FireServer(unpack({npc,3}))
+            task.wait()
+        end
+    end
+    if not _G.slowfight then
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Rf_ChallengeFinish"):InvokeServer()
+        task.wait()
+    end
+end
 
 function hatcheggs(var)
     local eggshop = "Draw"
@@ -210,6 +228,10 @@ window:Dropdown("Choose World",mapTable , function(name)
 end)
 window:Toggle("Quick Fight", false, function(bool)
     _G.auto2 = bool
+    task_defer(autoFight(_G.enemytemp))
+end)
+window:Toggle("slow Fight", false, function(bool)
+    _G.slowfight = bool
     task_defer(autoFight(_G.enemytemp))
 end)
 window:Dropdown("secret boss", mapTable, function(name)
