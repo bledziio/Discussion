@@ -123,7 +123,7 @@ function autoFight(tablesvar)
 end
 _G.slowfight = false
 function slowautoFight(tablesvar)
-    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(i)
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(1)
     task.wait()
     while _G.slowfight do
         for i, v in pairs(enemyTable[tablesvar]) do
