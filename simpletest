@@ -234,7 +234,7 @@ window:Toggle("slow Fight", false, function(bool)
     _G.slowfight = bool
     task_defer(slowautoFight(_G.enemytemp))
 end)
-window:Dropdown("secret boss", mapTable, function(name)
+window:Dropdown("Choose Secret Boss",{"SecretBoss005","SecretBoss004","SecretBoss003","SecretBoss002","SecretBoss001"} , function(name)
     _G.secretboss = name
 end)
 window:Toggle("secret Boss auto", false, function(bool)
