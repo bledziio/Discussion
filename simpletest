@@ -122,7 +122,7 @@ function autoFight(tablesvar)
     end
 end
 _G.slowfight - false
-function autoFight(tablesvar)
+function slowautoFight(tablesvar)
     game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Fight"):WaitForChild("Re_ChallengeStart"):FireServer(i)
     task.wait()
     while _G.slowfight do
@@ -232,7 +232,7 @@ window:Toggle("Quick Fight", false, function(bool)
 end)
 window:Toggle("slow Fight", false, function(bool)
     _G.slowfight = bool
-    task_defer(autoFight(_G.enemytemp))
+    task_defer(slowautoFight(_G.enemytemp))
 end)
 window:Dropdown("secret boss", mapTable, function(name)
     _G.secretboss = name
