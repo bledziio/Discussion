@@ -26,7 +26,7 @@ local eggTable = {
 --local eggkeysOnly = {} -- Initialize an empty table for keys
 --for key, _ in pairs(eggTable) do table.insert(eggkeysOnly, key)  end
 local pettable = {}
-for i = 1, numPets do table.insert(deletepettable, "Pet"..string.format("%03d", i)) end
+for i = 1, numPets do table.insert(pettable, "Pet"..string.format("%03d", i)) end
 
 local enemyTable = {}
 enemyTable["001"] = {}
