@@ -11,7 +11,7 @@ _G.enemytemp = lastmap
 _G.eggmaptemp = lastmap
 _G.eggshoptemp = {}
 _G.eggshoptempval = "026"
-
+local numPets = 15
 local eggTable = {
     ["001"] = { "001", "002", "003", "004" },
     ["002"] = { "005", "006", "007", "008" },
@@ -25,6 +25,8 @@ local eggTable = {
 }
 --local eggkeysOnly = {} -- Initialize an empty table for keys
 --for key, _ in pairs(eggTable) do table.insert(eggkeysOnly, key)  end
+local pettable = {}
+for i = 1, numPets do table.insert(deletepettable, "Pet"..string.format("%03d", i)) end
 
 local enemyTable = {}
 enemyTable["001"] = {}
@@ -145,13 +147,13 @@ function slowautoFight(tablesvar)
     end
 end
 
-function hatcheggs(var,del)
+function hatcheggs(var)
     local eggshop = "Draw"
     eggshop = eggshop .. var
     while _G.auto3 do
         local rcount = 300
         repeat 
-        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Pets"):WaitForChild("Re_Hatch"):FireServer(unpack({"Hatch",eggshop,deletepettable}))
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Pets"):WaitForChild("Re_Hatch"):FireServer(unpack({"Hatch",eggshop,pettable}))
         task.wait()
         rcount = rcount - 1
     until not _G.auto3 or rcount <= 0
@@ -293,17 +295,9 @@ end)
 window2:Dropdown("Choose Egg Shop", {1,2,3,4}, function(name)
     _G.eggshoptempval =  _G.eggshoptemp[name]
 end)
-local deletepettable = {}
-window2:Box("delete pet", function(text, focuslost)
-    if focuslost then
-        local deletepettable = {}
-        local numPets = tonumber(text)
-        for i = 1, numPets do table.insert(deletepettable, "Pet"..string.format("%03d", i)) end
-    end
- end)
 window2:Toggle("Hatch Best Eggs", false, function(bool)
     _G.auto3 = bool
-    task_defer(hatcheggs(_G.eggshoptempval,deletepettable))
+    task_defer(hatcheggs(_G.eggshoptempval))
 end)
 window2:Label("Teleport", Color3.fromRGB(50, 200, 166))
 
