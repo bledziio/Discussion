@@ -145,13 +145,13 @@ function slowautoFight(tablesvar)
     end
 end
 
-function hatcheggs(var)
+function hatcheggs(var,del)
     local eggshop = "Draw"
     eggshop = eggshop .. var
     while _G.auto3 do
         local rcount = 300
         repeat 
-        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Pets"):WaitForChild("Re_Hatch"):FireServer(unpack({"Hatch",eggshop,{}}))
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Pets"):WaitForChild("Re_Hatch"):FireServer(unpack({"Hatch",eggshop,deletepettable}))
         task.wait()
         rcount = rcount - 1
     until not _G.auto3 or rcount <= 0
@@ -251,10 +251,6 @@ window3:Toggle("Easy Tower Rooms", false, function(bool)
     _G.auto4 = bool
     task_defer(autoTower())
 end)
-window3:Toggle("timeless Tower", false, function(bool)
-    _G.auto6 = bool
-    task_defer(autoTower2())
-end)
 window3:Toggle("Tower Auto Attack", false, function(bool)
     _G.newauto = bool
     task_defer(towerAutoAttack())
@@ -297,9 +293,16 @@ end)
 window2:Dropdown("Choose Egg Shop", {1,2,3,4}, function(name)
     _G.eggshoptempval =  _G.eggshoptemp[name]
 end)
+local deletepettable = {}
+window:Box("Walkspeed", function(text, focuslost)
+    if focuslost then
+        local deletepettable = {}
+        for i = 1, text do table.insert(deletepettable, string.format("%03d", i)) end
+    end
+ end)
 window2:Toggle("Hatch Best Eggs", false, function(bool)
     _G.auto3 = bool
-    task_defer(hatcheggs(_G.eggshoptempval))
+    task_defer(hatcheggs(_G.eggshoptempval,deletepettable))
 end)
 window2:Label("Teleport", Color3.fromRGB(50, 200, 166))
 
