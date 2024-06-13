@@ -294,10 +294,11 @@ window2:Dropdown("Choose Egg Shop", {1,2,3,4}, function(name)
     _G.eggshoptempval =  _G.eggshoptemp[name]
 end)
 local deletepettable = {}
-window:Box("Walkspeed", function(text, focuslost)
+window2:Box("delete pet", function(text, focuslost)
     if focuslost then
         local deletepettable = {}
-        for i = 1, text do table.insert(deletepettable, string.format("%03d", i)) end
+        local numPets = tonumber(text)
+        for i = 1, numPets do table.insert(deletepettable, "Pet"..string.format("%03d", i)) end
     end
  end)
 window2:Toggle("Hatch Best Eggs", false, function(bool)
