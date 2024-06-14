@@ -174,7 +174,7 @@ end
 _G.auto8 = false
 function dosecretBoss()
     while _G.auto8 do
-        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_Start"):FireServer("SecretBoss005")
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Relics"):WaitForChild("Re_Start"):FireServer("SecretBoss006")
         task.wait(1.5)
         local rcount = 80
         repeat
