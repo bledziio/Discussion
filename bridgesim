@@ -20,9 +20,10 @@ function eggshop()
         for i=1, 600 do
             local args = {
                 [1] = "1Egg",
-                [2] = "Mine3"
+                [2] = "Volcano3"
             }
             game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("Pet"):WaitForChild("BuyEgg"):InvokeServer(unpack(args))
+            
             task.wait()
         end
         game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("Pet"):WaitForChild("EquipBest"):FireServer()
