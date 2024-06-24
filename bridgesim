@@ -1,0 +1,115 @@
+_G.auto = false
+_G.auto1 = false
+_G.auto2 = false
+local task_defer = task.defer
+local bridgenumber = 2.9907547760553019
+
+function autobrickbridge()
+    while _G.auto do
+        game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("Hit"):FireServer()
+        game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("StartRun"):FireServer()
+        game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("DataStore"):WaitForChild("Get"):InvokeServer("ActiveBoosts")
+        game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("FinishRun"):FireServer(bridgenumber)
+        task.wait()
+    end
+end
+
+function eggshop()
+    while _G.auto2 do
+        for i=1, 600 do
+            local args = {
+                [1] = "1Egg",
+                [2] = "Mine3"
+            }
+            game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("Pet"):WaitForChild("BuyEgg"):InvokeServer(unpack(args))
+            task.wait()
+        end
+        game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("Pet"):WaitForChild("EquipBest"):FireServer()
+        game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("Pet"):WaitForChild("CraftAll"):FireServer()
+        task.wait()
+    end
+    --equipbest 
+
+
+end
+function buyhammer()
+    while _G.auto3 do
+        local args = {
+            [1] = 7,
+            [2] = 8
+        } 
+        game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("BuyUpgrade"):FireServer(unpack(args))
+        game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("SetActiveUpgrade"):FireServer(56)
+        task.wait()
+    end
+    --equip hammer
+    --game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("SetActiveUpgrade"):FireServer(4)
+end    
+_G.collector = false
+function collectfish()
+    while _G.collector do
+        game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("GemMineClaim"):FireServer()
+        for i=1, 10 do
+            game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("CollectSummerDock"):FireServer(i)
+            task.wait()
+        end
+        wait(600)
+    end
+end
+_G.rebirthstattment = false
+function rebirthnow()
+    while _G.rebirthstattment do
+        game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("Rebirth"):FireServer()
+        task.wait()
+    end
+end
+_G.superrebirthstattment = false
+function superrebirthnow()
+    while _G.superrebirthstattment do
+        game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("SuperRebirth"):FireServer()
+        task.wait()
+    end
+end
+_G.claimrelicroll = false
+function claimroll()
+    while _G.claimrelicroll do
+        game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("DoEventRoll"):InvokeServer()
+        task.wait()
+    end
+end
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/miroeramaa/TurtleLib/main/TurtleUiLib.lua"))()
+local window = library:Window("Window")
+--local window = library:Window("other window")
+--window.Parent.Position = UDim2.new(0, 500, 0, 500)
+--UiWindow.Position = UDim2.new(0, 500, 0, 500)
+-- Name of button, callback500
+
+window:Toggle("farm", false, function(bool)
+    _G.auto = bool
+    task_defer(autobrickbridge())
+end)
+
+window:Toggle("egg", false, function(bool)
+    _G.auto2 = bool
+    task_defer(eggshop())
+end)
+window:Toggle("buy hammer", false, function(bool)
+    _G.auto3 = bool
+    task_defer(buyhammer())
+end)
+window:Toggle("collect", false, function(bool)
+    _G.collector = bool
+    task_defer(collectfish())
+end)
+window:Toggle("rebirth", false, function(bool)
+    _G.rebirthstattment = bool
+    task_defer(rebirthnow())
+end)
+window:Toggle("super rebirth", false, function(bool)
+    _G.superrebirthstattment = bool
+    task_defer(superrebirthnow())
+end)
+window:Toggle("claim rolls", false, function(bool)
+    _G.claimrelicroll = bool
+    task_defer(claimroll())
+end)
