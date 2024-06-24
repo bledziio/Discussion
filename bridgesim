@@ -10,6 +10,7 @@ function autobrickbridge()
         game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("StartRun"):FireServer()
         game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("DataStore"):WaitForChild("Get"):InvokeServer("ActiveBoosts")
         game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("FinishRun"):FireServer(bridgenumber)
+        game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("DoTitleRoll"):InvokeServer()
         task.wait()
     end
 end
