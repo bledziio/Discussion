@@ -1,6 +1,7 @@
 _G.auto = false
 _G.auto1 = false
 _G.auto2 = false
+_G.auto3 = false
 local task_defer = task.defer
 local bridgenumber = 2.9907547760553019
 
@@ -22,6 +23,7 @@ function eggshop()
                 [1] = "1Egg",
                 [2] = "Volcano3"
             }
+            
             game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("Pet"):WaitForChild("BuyEgg"):InvokeServer(unpack(args))
             
             task.wait()
