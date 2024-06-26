@@ -105,6 +105,16 @@ function dothemobbys()
         wait(120)
     end
 end
+_G.playtimeCondition = false
+function claimplaytimerewardfunc()
+    while _G.playtimeCondition do
+        for i - 1, 12 do
+            game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("ClaimPlaytimeReward"):FireServer(i)
+            task.wait()
+        end
+        wait(1200)
+    end
+end
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/miroeramaa/TurtleLib/main/TurtleUiLib.lua"))()
 local window = library:Window("farm")
 local window2 = library:Window("rebirth")
@@ -137,6 +147,10 @@ end)
 window2:Toggle("claim rolls", false, function(bool)
     _G.claimrelicroll = bool
     task_defer(claimroll())
+end)
+window2:Toggle("claim PlayTime", false, function(bool)
+    _G.playtimeCondition = bool
+    task_defer(claimplaytimerewardfunc())
 end)
 window2:Toggle("rebirth", false, function(bool)
     _G.rebirthstattment = bool
