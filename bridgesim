@@ -81,6 +81,30 @@ function claimroll()
         task.wait()
     end
 end
+_G.doObby = false
+function dothemobbys()
+    while _G.doObby do
+          -- start obby farmworld
+        game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("StartObby"):InvokeServer("Farm Obby")
+        task.wait(1)
+        local args = {
+            [1] = 8.860992670059204,
+            [2] = true
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("EndObby"):FireServer(unpack(args))
+        task.wait()
+
+        --factory
+        game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("StartObby"):InvokeServer("Factory Obby")
+        task.wait()
+        local args = {
+            [1] = 37.81868386268616,
+            [2] = true
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("EndObby"):FireServer(unpack(args))
+        wait(120)
+    end
+end
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/miroeramaa/TurtleLib/main/TurtleUiLib.lua"))()
 local window = library:Window("farm")
 local window2 = library:Window("rebirth")
@@ -101,6 +125,10 @@ end)
 window:Toggle("buy hammer", false, function(bool)
     _G.auto3 = bool
     task_defer(buyhammer())
+end)
+window:Toggle("do obbys", false, function(bool)
+    _G.doObby = bool
+    task_defer(dothemobbys())
 end)
 window2:Toggle("collect", false, function(bool)
     _G.collector = bool
