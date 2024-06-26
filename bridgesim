@@ -108,7 +108,7 @@ end
 _G.playtimeCondition = false
 function claimplaytimerewardfunc()
     while _G.playtimeCondition do
-        for i - 1, 12 do
+        for i = 1, 12 do
             game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("ClaimPlaytimeReward"):FireServer(i)
             task.wait()
         end
