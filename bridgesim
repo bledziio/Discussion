@@ -16,12 +16,12 @@ function autobrickbridge()
     end
 end
 
-function eggshop()
+function eggshop(x)
     while _G.auto2 do
         for i=1, 600 do
             local args = {
                 [1] = "1Egg",
-                [2] = "Volcano3"
+                [2] = x
             }
             
             game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("Pet"):WaitForChild("BuyEgg"):InvokeServer(unpack(args))
@@ -115,6 +115,18 @@ function claimplaytimerewardfunc()
         wait(1200)
     end
 end
+
+_G.blockconditioner = false
+function trybothblocks()
+    local lastblock = workspace.Worlds["10"].Blocks:GetChildren()[16]
+    local magicblock = workspace.Worlds.Magic.Blocks:GetChildren()[4]
+    while _G.blockconditioner do
+        game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(lastblock.Position))
+        task.wait()
+        game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(magicblock.Position))
+        task.wait()
+    end
+end
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/miroeramaa/TurtleLib/main/TurtleUiLib.lua"))()
 local window = library:Window("farm")
 local window2 = library:Window("rebirth")
@@ -127,10 +139,17 @@ window:Toggle("farm", false, function(bool)
     _G.auto = bool
     task_defer(autobrickbridge())
 end)
-
-window:Toggle("egg", false, function(bool)
+window:Toggle("newblock", false, function(bool)
+    _G.blockconditioner = bool
+    task_defer(trybothblocks())
+end)
+window:Toggle("ez egg", false, function(bool)
     _G.auto2 = bool
-    task_defer(eggshop())
+    task_defer(eggshop("Castle3"))
+end)
+window:Toggle("last egg", false, function(bool)
+    _G.auto2 = bool
+    task_defer(eggshop("Future3"))
 end)
 window:Toggle("buy hammer", false, function(bool)
     _G.auto3 = bool
